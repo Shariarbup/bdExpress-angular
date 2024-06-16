@@ -1,38 +1,63 @@
 <div class="signup">
     <h1 class="form-header">Seller SignUp</h1>
-    <form class="common-form" #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm.value)" >
+    <form class="common-form" #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm.value)">
         {{signUpForm.value | json }}
         <hr>
         {{userModel | json}}
         <div class="form-group">
-            <input class="form-control form-input" minlength="2" [class.is-invalid]="name.value > 10 || name.value < 1" [class.is-invalid]="name.invalid" required type="text" name="name" #name="ngModel" [(ngModel)]="userModel.name" placeholder="Enter name">
+            <input class="form-control form-input" minlength="2" [class.is-invalid]="name.value > 10 || name.value < 1"
+                [class.is-invalid]="name.invalid" required type="text" name="name" #name="ngModel"
+                [(ngModel)]="userModel.name" placeholder="Enter name">
             {{name.errors | json}}
             {{name.invalid}}
             <small class="text-danger" *ngIf="name.value && name.value.length < 2">Name must be 2 character</small> <br>
-            <small class="text-danger" *ngIf="name.value && name.value.length > 10">Name must be less than 10 character</small>
+            <small class="text-danger" *ngIf="name.value && name.value.length > 10">Name must be less than 10
+                character</small>
             <div *ngIf="name.errors && (name.touched || name.dirty)">
                 <small class="text-danger" *ngIf="name.errors['required']">Name is required.</small> <br>
             </div>
         </div>
-        <input class="form-input" type="email" name="email" [(ngModel)]="userModel.email" placeholder="Enter email">
-        <input class="form-input" type="tel" name="phone" [(ngModel)]="userModel.phone" placeholder="Enter phone">
-        <input class="form-input" type="date" name="birthDate" [(ngModel)]="userModel.birthDate" placeholder="Enter Birthdate">
-        <input class="form-input" type="password" name="password" [(ngModel)]="userModel.password" placeholder="Enter password">
-        <input class="form-input" type="password" name="confirmPassword" [(ngModel)]="userModel.confirmPassword" placeholder="Confirm password">
+        <div class="form-group">
+            <input class="form-control form-input" type="email" name="email" [(ngModel)]="userModel.email"
+            #email="ngModel"
+            placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <input class="form-control form-input" type="tel" name="phone" [(ngModel)]="userModel.phone"
+            #phone="ngModel"
+            placeholder="Enter phone">
+        </div>
+        <div class="form-group">
+            <input class="form-control form-input" type="date" name="birthDate" [(ngModel)]="userModel.birthDate"
+            #birthDate="ngModel"
+            placeholder="Enter Birthdate">
+        </div>
+        <div class="form-group">
+            <input class="form-control form-input" type="password" name="password" [(ngModel)]="userModel.password"
+            #password="ngModel"
+            placeholder="Enter password">
+        </div>
+        <div class="form-group">
+            <input class="form-control form-input" type="password" name="confirmPassword"
+            #confirmPassword="ngModel"
+            [(ngModel)]="userModel.confirmPassword" placeholder="Confirm password">
+        </div>
         <div class="form-group">
             <select name="topic" [(ngModel)]="userModel.topic" class="custom-select">
-                <option value="" >I am interested in</option>
+                <option value="">I am interested in</option>
                 <option *ngFor="let topic of topics">{{topic}}</option>
             </select>
         </div>
         <div class="form-group">
             <label>Time preferance</label>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="timePreferance" [(ngModel)]="userModel.timePreferance" value="morning">
+                <input class="form-check-input" type="radio" name="timePreferance"
+                    [(ngModel)]="userModel.timePreferance" value="morning">
                 <label class="form-check-label">Morning (9AM - 12PM)</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="timePreferance" [(ngModel)]="userModel.timePreferance" value="evening">
+                <input class="form-check-input" type="radio" name="timePreferance"
+                    [(ngModel)]="userModel.timePreferance" value="evening">
                 <label class="form-check-label">Evening (5PM - 8PM)</label>
             </div>
         </div>
