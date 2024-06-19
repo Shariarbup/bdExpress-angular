@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from 'src/app/model/user';
+import { UserserviceService } from 'src/app/services/userservice.service';
 
 @Component({
   selector: 'app-signup',
@@ -8,11 +9,30 @@ import { User } from 'src/app/model/user';
 })
 export class SignupComponent {
   topics = ['Java', 'Angular', 'Full Stack'];
-  userModel : User = new User("Al Shariar", "itmasjoy@gmail.com", 1968385155, new Date(), "123", "123", "Java" , "morning", false) ;
+  userModel : User = new User("Al Shariar", "itmasjoy@gmail.com", 1968385155, new Date(), "123", "123", "" , "morning", false) ;
+  topicHasError: boolean = true;
+  errorMsg = '';
   
-  signUp(data: Object): void {
+
+  constructor(
+    private userService: UserserviceService
+  ) {}
+  
+  signUp(data: User): void {
       console.log("🚀 ~ SignupComponent ~ signUp ~ data:", data)
-      
+      this.userService.enroll(data)
+      .subscribe(
+        data => console.log(data),
+        error => this.errorMsg = error.statusText
+      );
+  }
+
+  validateTopic(topicValue: string) {
+    if (topicValue === 'default') {
+      this.topicHasError = true;
+    } else {
+      this.topicHasError = false;
+    }
   }
 
   // The control has been visited - ng-touched ng-untouched

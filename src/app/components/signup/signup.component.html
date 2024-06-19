@@ -1,15 +1,20 @@
 <div class="signup">
-    <h1 class="form-header">Seller SignUp</h1>
-    <form class="common-form" #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm.value)">
-        {{signUpForm.value | json }}
+    <h1 class="form-header">Seller SignUp</h1> <button class="btn btn-primary">Reactive form</button>
+    <div class="alert alert-danger" *ngIf="errorMsg">
+        {{errorMsg}}
+    </div>
+    <hr>
+    <form class="common-form" #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm.value)" novalidate>
+        <span class="text-success">Form value: </span>{{signUpForm.value | json }}
         <hr>
-        {{userModel | json}}
+        <span class="text-success">User Model value: </span>{{userModel | json}}
+        <hr>
+        <span class="text-success">Form validation value: </span>{{signUpForm.form.valid}}
+        <hr>
         <div class="form-group">
             <input class="form-control form-input" minlength="2" [class.is-invalid]="name.value > 10 || name.value < 1"
                 [class.is-invalid]="name.invalid" required type="text" name="name" #name="ngModel"
                 [(ngModel)]="userModel.name" placeholder="Enter name">
-            {{name.errors | json}}
-            {{name.invalid}}
             <small class="text-danger" *ngIf="name.value && name.value.length < 2">Name must be 2 character</small> <br>
             <small class="text-danger" *ngIf="name.value && name.value.length > 10">Name must be less than 10
                 character</small>
@@ -20,17 +25,31 @@
         <div class="form-group">
             <input class="form-control form-input" type="email" name="email" [(ngModel)]="userModel.email"
             #email="ngModel"
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
             placeholder="Enter email">
+            <div *ngIf="email.errors && (email.touched || email.dirty)">
+                <small class="text-danger" *ngIf="email.errors['pattern']">Email is not valid.</small> <br>
+            </div>
         </div>
         <div class="form-group">
             <input class="form-control form-input" type="tel" name="phone" [(ngModel)]="userModel.phone"
             #phone="ngModel"
+            pattern="^\d{11}$"
             placeholder="Enter phone">
+            <div *ngIf="phone.errors && (phone.touched || phone.dirty)">
+                <small class="text-danger" *ngIf="phone.errors['pattern']">Phone no. is not valid.</small> <br>
+            </div>
         </div>
         <div class="form-group">
             <input class="form-control form-input" type="date" name="birthDate" [(ngModel)]="userModel.birthDate"
             #birthDate="ngModel"
-            placeholder="Enter Birthdate">
+            required
+            mi="18"
+            placeholder="Enter Birth date">
+            <div *ngIf="birthDate.errors && (birthDate.dirty || birthDate.touched)">
+                <small class="error" *ngIf="birthDate.errors['required']">Birth date is required.</small>
+                <small class="error" *ngIf="birthDate.errors['minimumAge']">You must be at least 18 years old.</small>
+              </div>
         </div>
         <div class="form-group">
             <input class="form-control form-input" type="password" name="password" [(ngModel)]="userModel.password"
@@ -43,10 +62,14 @@
             [(ngModel)]="userModel.confirmPassword" placeholder="Confirm password">
         </div>
         <div class="form-group">
-            <select name="topic" [(ngModel)]="userModel.topic" class="custom-select">
-                <option value="">I am interested in</option>
+            <select name="topic" required #topic="ngModel" [(ngModel)]="userModel.topic" class="custom-select form-control"
+            [class.is-invalid]="topicHasError && topic.touched"
+            (blur)="validateTopic(topic.value)" (change)="validateTopic(topic.value)"
+            >
+                <option value="default">I am interested in</option>
                 <option *ngFor="let topic of topics">{{topic}}</option>
             </select>
+            <small class="text-danger" [class.d-none]="!topicHasError || topic.untouched">Please select an option.</small>
         </div>
         <div class="form-group">
             <label>Time preferance</label>
@@ -62,12 +85,12 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="formcheck">
+            <div class="form-check">
                 <input class="form-check-input" name="subscribe" [(ngModel)]="userModel.subscribe" type="checkbox">
-                <label>Send me promotional offers</label>
+                <label class="form-check-label">Send me promotional offers</label>
             </div>
         </div>
-        <button class="form-button">SignUp</button>
+        <button [disabled]="signUpForm.form.invalid || topicHasError" class="btn btn-success" type="submit">SignUp</button>
     </form>
 </div>
 
