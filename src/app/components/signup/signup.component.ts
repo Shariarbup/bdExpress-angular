@@ -18,7 +18,8 @@ export class SignupComponent {
     private userService: UserserviceService
   ) {}
   
-  signUp(data: User): void {
+  signUp(data: any): void {
+      console.log("🚀 ~ SignupComponent ~ signUp ~ data:", data.value)
       console.log("🚀 ~ SignupComponent ~ signUp ~ data:", data)
       this.userService.enroll(data)
       .subscribe(

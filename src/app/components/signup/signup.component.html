@@ -4,7 +4,7 @@
         {{errorMsg}}
     </div>
     <hr>
-    <form class="common-form" #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm.value)" novalidate>
+    <form class="common-form" #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)" novalidate>
         <span class="text-success">Form value: </span>{{signUpForm.value | json }}
         <hr>
         <span class="text-success">User Model value: </span>{{userModel | json}}
