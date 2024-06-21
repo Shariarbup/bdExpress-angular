@@ -8,8 +8,9 @@ import { HomeComponent } from './components/home/home.component';
 import { SellerComponent } from './components/seller/seller.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveSignUpComponent } from './components/reactive-sign-up/reactive-sign-up.component'
 
 @NgModule({
   declarations: [
@@ -18,13 +19,15 @@ import { HttpClientModule } from '@angular/common/http'
     HomeComponent,
     SellerComponent,
     FooterComponent,
-    SignupComponent
+    SignupComponent,
+    ReactiveSignUpComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
