@@ -18,4 +18,26 @@ export class ReactiveSignUpComponent {
       postalCode: new FormControl('')
     })
   })
+
+  // in this set method you have to pass all the formgroup field
+
+  loadApiData() {
+    this.registrationForm.setValue({
+      userName: 'Al Shariar',
+      password: 'xyz',
+      confirmPassword: 'xyz',
+      address: {
+        city: 'City',
+        state: 'State',
+        postalCode: '123456'
+      }
+    })
+  }
+  loadApiData2() {
+    this.registrationForm.patchValue({
+      userName: 'Al Shariar',
+      password: 'xyz',
+      confirmPassword: 'xyz'
+    })
+  }
 }
