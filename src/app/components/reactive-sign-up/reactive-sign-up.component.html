@@ -59,7 +59,17 @@ and each of the field called form control
     <form [formGroup]="registrationForm2">
         <div class="form-group">
             <label>Username</label>
-            <input formControlName="userName2" type="text" class="form-control">
+            <input formControlName="userName2" type="text" class="form-control"
+            [class.is-invalid]="registrationForm2.get('userName2')?.touched && registrationForm2.get('userName2')?.invalid"
+            >
+            <!-- <small class="text-danger" 
+            [class.d-none]="registrationForm2.get('userName2')?.untouched || registrationForm2.get('userName2')?.valid">
+            User name is required</small> -->
+            <div *ngIf="registrationForm2.get('userName2')?.touched && registrationForm2.get('userName2')?.invalid">
+               <small *ngIf="userName2?.hasError('required')" class="text-danger">User name is required</small>
+               <small *ngIf="userName2?.hasError('minlength')" class="text-danger">User name must be 2 character</small>
+            </div>
+            
         </div>
         <div class="form-group">
             <label>Password</label>

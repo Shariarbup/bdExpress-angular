@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder} from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-reactive-sign-up',
@@ -12,9 +12,13 @@ export class ReactiveSignUpComponent {
     private fb: FormBuilder
   ) {}
 
+  get userName2() {
+    return this.registrationForm2.get('userName2');
+  }
+
   registrationForm2 = this.fb.group({
-    userName2: ['Al Shariar 2'],
-    password2: [''],
+    userName2: ['Al Shariar 2', [Validators.required, Validators.minLength(2)]],
+    password2: ['', Validators.required],
     confirmPassword2: [''],
     address2: this.fb.group({
       city2: [''],
