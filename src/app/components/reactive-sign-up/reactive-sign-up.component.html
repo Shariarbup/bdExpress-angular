@@ -50,4 +50,42 @@ and each of the field called form control
             (patchValue method)
         </button>
     </form>
+
+    <hr> <hr> <hr>
+    <h2>Registration form Two</h2>
+    <hr>
+    <span>Registration form Two value:</span> {{registrationForm2.value | json}} 
+    <hr>
+    <form [formGroup]="registrationForm2">
+        <div class="form-group">
+            <label>Username</label>
+            <input formControlName="userName2" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input formControlName="password2" type="password" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Confirm Password</label>
+            <input formControlName="confirmPassword2" type="password" class="form-control">
+        </div>
+        <div formGroupName="address2">
+            <div class="form-group">
+                <label>City</label>
+                <input formControlName="city2" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>State</label>
+                <input formControlName="state2" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Postal Code</label>
+                <input formControlName="postalCode2" type="text" class="form-control">
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Register Two</button>
+        <button (click)="loadApiForFormBuilderData()" class="btn btn-secondary mx-2" >Load Api Data 
+            (setValue method)
+        </button>
+    </form>
 </div>

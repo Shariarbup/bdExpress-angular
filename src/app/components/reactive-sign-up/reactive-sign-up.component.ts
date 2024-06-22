@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-reactive-sign-up',
@@ -7,6 +7,21 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./reactive-sign-up.component.css']
 })
 export class ReactiveSignUpComponent {
+
+  constructor(
+    private fb: FormBuilder
+  ) {}
+
+  registrationForm2 = this.fb.group({
+    userName2: ['Al Shariar 2'],
+    password2: [''],
+    confirmPassword2: [''],
+    address2: this.fb.group({
+      city2: [''],
+      state2: [''],
+      postalCode2: ['']
+    })
+  })
 
   registrationForm = new FormGroup({
     userName: new FormControl('Shariar'),
@@ -33,11 +48,25 @@ export class ReactiveSignUpComponent {
       }
     })
   }
+
   loadApiData2() {
     this.registrationForm.patchValue({
       userName: 'Al Shariar',
       password: 'xyz',
       confirmPassword: 'xyz'
+    })
+  }
+
+  loadApiForFormBuilderData() {
+    this.registrationForm2.setValue({
+      userName2: 'Al Shariar',
+      password2: 'xyz',
+      confirmPassword2: 'xyz',
+      address2: {
+        city2: 'City',
+        state2: 'State',
+        postalCode2: '123456'
+      }
     })
   }
 }
