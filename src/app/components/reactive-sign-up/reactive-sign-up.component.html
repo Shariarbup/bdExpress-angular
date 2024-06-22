@@ -69,7 +69,7 @@ and each of the field called form control
                <small *ngIf="userName2?.hasError('required')" class="text-danger">User name is required</small>
                <small *ngIf="userName2?.hasError('minlength')" class="text-danger">User name must be 2 character</small>
                <small *ngIf="userName2?.hasError('forbiddenName')" class="text-danger">
-                {{userName2?.hasError('forbiddenName')}} This input name is not valid</small>
+                {{userName2?.errors?.['forbiddenName'].value}} This input name is not valid</small>
             </div>
             
         </div>
