@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { forbiddenNameValidator } from '../shared/user-name.validator';
 import { passwordMatchValidator } from '../shared/password.validator';
@@ -8,11 +8,26 @@ import { passwordMatchValidator } from '../shared/password.validator';
   templateUrl: './reactive-sign-up.component.html',
   styleUrls: ['./reactive-sign-up.component.css']
 })
-export class ReactiveSignUpComponent {
+export class ReactiveSignUpComponent implements OnInit{
 
   constructor(
     private fb: FormBuilder
   ) {}
+
+  ngOnInit(): void {
+    this.registrationForm2.get('subscribe2')?.valueChanges
+    .subscribe(
+      checkValue => {
+        const email2 = this.registrationForm2.get('email2');
+        if(checkValue) {
+          email2?.setValidators(Validators.required);
+        } else {
+          email2?.clearValidators();
+        }
+        email2?.updateValueAndValidity();
+      }
+    )
+  }
 
   get userName2() {
     return this.registrationForm2.get('userName2');
@@ -26,10 +41,16 @@ export class ReactiveSignUpComponent {
     return this.registrationForm2.get('confirmPassword2');
   }
 
+  get email2() {
+    return this.registrationForm2.get('email2');
+  }
+
   registrationForm2 = this.fb.group({
     userName2: ['Al Shariar 2', [Validators.required, Validators.minLength(2), forbiddenNameValidator]],
     password2: ['', Validators.required],
     confirmPassword2: [''],
+    email2: [''],
+    subscribe2: [false],
     address2: this.fb.group({
       city2: [''],
       state2: [''],
@@ -76,6 +97,8 @@ export class ReactiveSignUpComponent {
       userName2: 'Al Shariar',
       password2: 'xyz',
       confirmPassword2: 'xyz',
+      email2: 'itmasjoy@gmail.com',
+      subscribe2: true,
       address2: {
         city2: 'City',
         state2: 'State',
