@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { forbiddenNameValidator } from '../shared/user-name.validator';
+import { passwordMatchValidator } from '../shared/password.validator';
 
 @Component({
   selector: 'app-reactive-sign-up',
@@ -17,6 +18,14 @@ export class ReactiveSignUpComponent {
     return this.registrationForm2.get('userName2');
   }
 
+  get password2() {
+    return this.registrationForm2.get('password2');
+  }
+
+  get confirmPassword2() {
+    return this.registrationForm2.get('confirmPassword2');
+  }
+
   registrationForm2 = this.fb.group({
     userName2: ['Al Shariar 2', [Validators.required, Validators.minLength(2), forbiddenNameValidator]],
     password2: ['', Validators.required],
@@ -26,7 +35,7 @@ export class ReactiveSignUpComponent {
       state2: [''],
       postalCode2: ['']
     })
-  })
+  }, {validators: passwordMatchValidator})
 
   registrationForm = new FormGroup({
     userName: new FormControl('Shariar'),
