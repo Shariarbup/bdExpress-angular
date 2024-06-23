@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 import { forbiddenNameValidator } from '../shared/user-name.validator';
 import { passwordMatchValidator } from '../shared/password.validator';
 
@@ -45,6 +45,11 @@ export class ReactiveSignUpComponent implements OnInit{
     return this.registrationForm2.get('email2');
   }
 
+  get alternateEmails2() {
+    return this.registrationForm2.get('alternateEmails2') as FormArray;
+  }
+
+
   registrationForm2 = this.fb.group({
     userName2: ['Al Shariar 2', [Validators.required, Validators.minLength(2), forbiddenNameValidator]],
     password2: ['', Validators.required],
@@ -55,7 +60,8 @@ export class ReactiveSignUpComponent implements OnInit{
       city2: [''],
       state2: [''],
       postalCode2: ['']
-    })
+    }),
+    alternateEmails2: this.fb.array([])
   }, {validators: passwordMatchValidator})
 
   registrationForm = new FormGroup({
@@ -93,7 +99,7 @@ export class ReactiveSignUpComponent implements OnInit{
   }
 
   loadApiForFormBuilderData() {
-    this.registrationForm2.setValue({
+    this.registrationForm2.patchValue({
       userName2: 'Al Shariar',
       password2: 'xyz',
       confirmPassword2: 'xyz',
