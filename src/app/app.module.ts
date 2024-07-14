@@ -10,8 +10,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveSignUpComponent } from './components/reactive-sign-up/reactive-sign-up.component';
-import { ModelContentComponent } from './components/model-content/model-content.component'
+import { ReactiveSignUpComponent } from './components/reactive-sign-up/reactive-sign-up.component'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -21,15 +21,15 @@ import { ModelContentComponent } from './components/model-content/model-content.
     SellerComponent,
     FooterComponent,
     SignupComponent,
-    ReactiveSignUpComponent,
-    ModelContentComponent
+    ReactiveSignUpComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
