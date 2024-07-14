@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/model/user';
 import { UserserviceService } from 'src/app/services/userservice.service';
+import { ModelContentComponent } from '../model-content/model-content.component';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +17,8 @@ export class SignupComponent {
   
 
   constructor(
-    private userService: UserserviceService
+    private userService: UserserviceService,
+    private modalService: NgbModal
   ) {}
   
   signUp(data: any): void {
@@ -48,4 +51,26 @@ export class SignupComponent {
   // ng-dirty - dirty
   // ng-valid - valid
   // ng-invalid - invalid
+
+
+  openModal() {
+    console.log("Hello")
+    const modelDiv = document.getElementById('myModal');
+    if (modelDiv !== null) {
+      modelDiv.style.display = 'block';
+      modelDiv.style.paddingRight= '17px';
+    }
+  }
+
+  closeModal() {
+    const modelDiv = document.getElementById('myModal');
+    if (modelDiv !== null) {
+      modelDiv.style.display = 'none';
+    }
+  }
+
+  openModalNgBootstrapModal() {
+    const modalRef = this.modalService.open(ModelContentComponent);
+    modalRef.componentInstance.name = 'World';
+  }
 }

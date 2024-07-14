@@ -10,7 +10,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveSignUpComponent } from './components/reactive-sign-up/reactive-sign-up.component'
+import { ReactiveSignUpComponent } from './components/reactive-sign-up/reactive-sign-up.component';
+import { ModelContentComponent } from './components/model-content/model-content.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ReactiveSignUpComponent } from './components/reactive-sign-up/reactive-
     SellerComponent,
     FooterComponent,
     SignupComponent,
-    ReactiveSignUpComponent
+    ReactiveSignUpComponent,
+    ModelContentComponent
   ],
   imports: [
     BrowserModule,
