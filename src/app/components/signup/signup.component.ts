@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/model/user';
 import { UserserviceService } from 'src/app/services/userservice.service';
 import { ModelContentComponent } from '../model-content/model-content.component';
+import { CustomModalService } from 'src/app/services/custom-modal.service';
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +19,8 @@ export class SignupComponent {
 
   constructor(
     private userService: UserserviceService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private modalServiceTwo: CustomModalService
   ) {}
   
   signUp(data: any): void {
@@ -71,6 +73,23 @@ export class SignupComponent {
 
   openModalNgBootstrapModal() {
     const modalRef = this.modalService.open(ModelContentComponent);
-    modalRef.componentInstance.name = 'World';
+    modalRef.componentInstance.data = {
+      message: 'Hello from parent!',
+      // other data properties as needed
+    };
+
+    modalRef.result.then((result) => {
+      console.log(`Closed with: ${result}`);
+    }, (reason) => {
+      console.log(`Dismissed: ${reason}`);
+    });
+  }
+
+  openModalCustomModal(customModalTemplate: TemplateRef<any>) {
+    // this.modalServiceTwo.open(customModalTemplate, {size: 'lg', title: 'Foo'}).subscribe(
+    //   (action)=> {
+    //     console.log('Modal Action'+ action)
+    //   }
+    // )
   }
 }

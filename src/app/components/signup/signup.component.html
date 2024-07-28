@@ -8,6 +8,9 @@
     <button type="button" class="btn btn-primary" (click)="openModalNgBootstrapModal()">
         NG BOOTSTRAP MODAL
     </button>
+    <button type="button" class="btn btn-primary" (click)="openModalCustomModal(customModalTemplate)">
+        Custom Modal
+    </button>
     <div class="alert alert-danger" *ngIf="errorMsg">
         {{errorMsg}}
     </div>
@@ -144,3 +147,11 @@
         </div>
     </div>
 </div>
+
+
+<ng-template #customModalTemplate>
+    <div>
+        This is custom modal template
+    </div>
+
+</ng-template>

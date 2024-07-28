@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -7,6 +7,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./model-content.component.css']
 })
 export class ModelContentComponent {
+  @Input() data: any; 
+  valueToPassBack: string = '';
   constructor(public activeModal: NgbActiveModal) {}
 
   close() {
@@ -15,6 +17,16 @@ export class ModelContentComponent {
 
   dismiss() {
     this.activeModal.dismiss('Cross click');
+  }
+
+  passBackValue() {
+    // Pass back data to the parent component
+    console.log("🚀 ~ ModelContentComponent ~ passBackValue ~ this.valueToPassBack:", this.valueToPassBack)
+    this.activeModal.close(this.valueToPassBack);
+  }
+
+  onValueChange(value: any) {
+    this.passBackValue = value;
   }
 
 }

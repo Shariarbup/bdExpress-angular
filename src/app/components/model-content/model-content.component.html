@@ -6,8 +6,12 @@
   </div>
   <div class="modal-body">
     <p>Hello, I'm a modal!</p>
+    <p>{{ data?.message }}</p>
+    
+    <input type="text" class="form-control" name="valueToPassBack" (ngModelChange)="onValueChange($event)" placeholder="Enter value..." />
   </div>
   <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="passBackValue()">Save</button>
     <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
   </div>
   
